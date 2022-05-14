@@ -1,0 +1,34 @@
+@import "~styles/styles-variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 2;
+  height: $header-height;
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title-button {
+    box-shadow: none !important;
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      margin-top: 0;
+    }
+  }
+
+  &__title-text {
+    margin-left: 32px;
+  }
+}
+
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  justify-content: flex-end;
+  margin-right: 50px;
+}

@@ -1,0 +1,32 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+@include mat.core();
+
+@import 'styles/styles-variables';
+@import 'styles/utils';
+@import 'styles/themes/custom-theme';
+@import 'app/app/app.component.scss-theme';
+@import 'app/shared/header/containers/header/header.component.scss-theme';
+@import 'app/shared/sidebar/sidebar.component.scss-theme';
+@import 'app/shared/footer/footer.component.scss-theme';
+
+
+// global mixin
+// Here you need to include the mixin from every file you want to use theme properties
+// Also need to import the scss file
+@mixin custom-components-theme($theme) {
+  @include utils-theme($theme);
+  @include app-component-theme($theme);
+  @include header-component-theme($theme);
+  @include sidebar-component-theme($theme);
+  @include footer-component-theme($theme);
+}
+
+@include custom-components-theme($theme);
+
+.dark-theme {
+  @include custom-components-theme($altTheme);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

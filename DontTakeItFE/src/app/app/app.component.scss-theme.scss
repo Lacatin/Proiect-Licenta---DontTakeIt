@@ -1,0 +1,23 @@
+@use '~@angular/material/index' as mat;
+@import "~styles/styles-variables";
+
+// That's how you can use theme properties (colors, sizes etc in other scss files)
+// You need to include this mixin in global style file (look for comment with "global mixin")
+@mixin app-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  $background-color: $layout-bg-color;
+
+  @if $is-dark {
+    $background-color: $layout-bg-color-dark;
+  }
+
+  .background {
+    background: $background-color;
+    color: mat.get-color-from-palette($foreground, base);
+  }
+}

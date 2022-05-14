@@ -1,0 +1,23 @@
+@use '~@angular/material/index' as mat;
+@import "~styles/styles-variables";
+
+@mixin sidebar-component-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .mat-list-base {
+    & .mat-list-item {
+      &.active {
+        background-color: mat.get-color-from-palette($primary, lighter);
+        outline: none;
+
+        & .mat-icon {
+          color: mat.get-color-from-palette($primary, main);
+        }
+      }
+
+      &:hover {
+        background-color: mat.get-color-from-palette($primary, lighter);
+      }
+    }
+  }
+}

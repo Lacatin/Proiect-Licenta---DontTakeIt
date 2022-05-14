@@ -1,0 +1,18 @@
+@import "~styles/styles-variables";
+
+.footer {
+  height: $footer-height;
+  width: $footer-width;
+  padding-right: 24px;
+  padding-left: 24px;
+  padding-top: 12px;
+
+  @media (max-width: map-get($grid-breakpoints, sm)) {
+    text-align: center;
+  }
+
+  &__author {
+    font-size: small;
+    text-align: center;
+  }
+}

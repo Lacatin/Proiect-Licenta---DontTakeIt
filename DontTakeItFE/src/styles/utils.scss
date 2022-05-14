@@ -1,0 +1,144 @@
+@use '~@angular/material' as mat;
+@import 'styles-variables';
+
+@for $i from 1 through 10 {
+  .margin-#{$i * 5} {
+    margin: 5px * $i !important;
+  }
+  .margin-top-#{$i * 5} {
+    margin-top: 5px * $i !important;
+  }
+  .margin-bottom-#{$i * 5} {
+    margin-bottom: 5px * $i !important;
+  }
+  .margin-top-bottom-#{$i * 5} {
+    margin-top: 5px * $i !important;
+    margin-bottom: 5px * $i !important;
+  }
+  .margin-left-#{$i * 5} {
+    margin-left: 5px * $i !important;
+  }
+  .margin-right-#{$i * 5} {
+    margin-right: 5px * $i !important;
+  }
+  .margin-left-right-#{$i * 5} {
+    margin-left: 5px * $i !important;
+    margin-right: 5px * $i !important;
+  }
+}
+
+@for $i from 1 through 10 {
+  .padding-#{$i * 5} {
+    padding: 5px * $i !important;
+  }
+  .padding-top-#{$i * 5} {
+    padding-top: 5px * $i !important;
+  }
+  .padding-bottom-#{$i * 5} {
+    padding-bottom: 5px * $i !important;
+  }
+  .padding-top-bottom-#{$i * 5} {
+    padding-top: 5px * $i !important;
+    padding-bottom: 5px * $i !important;
+  }
+  .padding-left-#{$i * 5} {
+    padding-left: 5px * $i !important;
+  }
+  .padding-right-#{$i * 5} {
+    padding-right: 5px * $i !important;
+  }
+  .padding-left-right-#{$i * 5} {
+    padding-left: 5px * $i !important;
+    padding-right: 5px * $i !important;
+  }
+}
+
+.width-full {
+  width: 100% !important;
+}
+
+.width-half {
+  width: 50% !important;
+}
+
+.height-full {
+  height: 100% !important;
+}
+
+.height-half {
+  height: 50% !important;
+}
+
+.height-full-vh {
+  height: 100vh !important;
+}
+
+@mixin utils-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $error: map-get($theme, error);
+  $info: map-get($theme, info);
+  $is-dark: map-get($theme, is-dark);
+
+  $success-color: mat.get-color-from-palette($success, 500);
+  $warn-color: mat.get-color-from-palette($warning, 500);
+  $error-color: mat.get-color-from-palette($error, 500);
+  $info-color: mat.get-color-from-palette($info, 500);
+
+  $success-color-contrast: mat.get-contrast-color-from-palette($success, 500);
+  $warn-color-contrast: mat.get-contrast-color-from-palette($warning, 500);
+  $error-color-contrast: mat.get-contrast-color-from-palette($error, 500);
+  $info-color-contrast: mat.get-contrast-color-from-palette($info, 500);
+
+  @if $is-dark {
+    $success-color: mat.get-color-from-palette($success, 900);
+    $warn-color: mat.get-color-from-palette($warning, 900);
+    $error-color: mat.get-color-from-palette($error, 900);
+    $info-color: mat.get-color-from-palette($info, 900);
+
+    $success-color-contrast: mat.get-contrast-color-from-palette($success, 900);
+    $warn-color-contrast: mat.get-contrast-color-from-palette($warning, 900);
+    $error-color-contrast: mat.get-contrast-color-from-palette($error, 900);
+    $info-color-contrast: mat.get-contrast-color-from-palette($info, 900);
+  }
+
+  .text-primary {
+    color: mat.get-color-from-palette($primary, main);
+  }
+
+  .text-anchor {
+    cursor: pointer;
+
+    &.text-muted {
+      color: $muted-text !important;
+      font-size: 80%;
+
+      &:hover {
+        color: mat.get-color-from-palette($primary, main) !important;
+      }
+    }
+  }
+
+  .error-notification-overlay {
+    color: $error-color-contrast;
+    background-color: $error-color;
+  }
+
+  .info-notification-overlay {
+    color: $info-color-contrast;
+    background-color: $info-color;
+  }
+
+  .success-notification-overlay {
+    color: $success-color-contrast;
+    background-color: $success-color;
+  }
+
+  .warn-notification-overlay {
+    color: $warn-color-contrast;
+    background-color: $warn-color;
+  }
+}

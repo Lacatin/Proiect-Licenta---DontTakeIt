@@ -1,0 +1,15 @@
+@use '~@angular/material/index' as mat;
+@import "~styles/styles-variables";
+
+@mixin footer-component-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .footer {
+    background-color: mat.get-color-from-palette($primary, main);
+    color: mat.get-contrast-color-from-palette($primary, main);
+
+    &__link-item {
+      color: mat.get-contrast-color-from-palette($primary, main);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="header">
+  <div class="header__title">
+    <button color="primary" class="header__title-button" mat-mini-fab (click)="openMenu()">
+      <mat-icon *ngIf="!isMenuOpened" class="header__title-button-icon">menu</mat-icon>
+      <mat-icon *ngIf="isMenuOpened" class="header__title-button-icon">arrow_back</mat-icon>
+    </button>
+    <h6 class="header__title-text">{{ title }}</h6>
+  </div>
+
+  <div fxFlex fxLayoutGap="32px" class="header-toolbar">
+    <app-dark-mode></app-dark-mode>
+  </div>
+
+</mat-toolbar>

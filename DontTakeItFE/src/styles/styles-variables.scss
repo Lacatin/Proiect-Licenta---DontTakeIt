@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+
+$toolbar-breakpoint: 600px;
+
+$fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
+
+$link-hover-decoration: none;
+$label-margin-bottom: 0;
+
+$layout-bg-color: #ECF0F4;
+$layout-bg-color-dark: #4f5258;
+
+$muted-text: #6c757d;
+
+$header-height: 64px;
+$sidebar-width: 300px;
+$footer-height: 48px;
+$sidebar-content-padding: 48px;
+$layout-padding: 16px;
+$footer-width: calc(100% - #{$sidebar-content-padding});
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
