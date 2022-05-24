@@ -1,0 +1,25 @@
+@import "~styles/styles-variables";
+
+table {
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  ul{
+    list-style-type:none;
+    padding-inline-start: 0px;
+  }
+  
+  li{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    margin:2px;
+  }
+
+  #nameColumn:hover {
+    border-bottom: 2px solid #3f6791;
+    cursor: pointer;
+  }

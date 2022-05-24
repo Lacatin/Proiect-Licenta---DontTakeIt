@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +10,7 @@ export class HeaderComponent {
   @Output() isShowSidebar = new EventEmitter<boolean>();
   public title = 'DontTake It'
 
-  constructor(
-    private router: Router
-  ) {
-  }
+  constructor() {}
 
   public openMenu(): void {
     this.isMenuOpened = !this.isMenuOpened;
