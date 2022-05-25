@@ -2,12 +2,16 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { SharedModule } from "~shared/shared.module";
 import { PagesRoutes } from "./pages.routing";
 import { HomePage } from './home/home.page';
-import { MatTableModule } from '@angular/material/table';
 import { StudentiDashboardComponent } from './studenti-dashboard/studenti-dashboard.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const ANGULAR_MATERIAL: any[] = [
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
 ];
 
 const PAGES_AND_COMPONENTS_FOR_PAGES: any[] = [

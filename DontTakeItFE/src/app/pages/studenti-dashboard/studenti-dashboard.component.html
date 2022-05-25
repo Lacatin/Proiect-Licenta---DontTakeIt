@@ -2,7 +2,7 @@
     <div class="form-container">
         <form [formGroup]="formGroup" (submit)="submitFiltering()">
             <table>
-
+              <tr>
                 <td>
                     <mat-form-field>
                       <input type="text" placeholder="Nume" matInput formControlName="nume" [matAutocomplete]="autoStudentiNume">
@@ -32,6 +32,39 @@
                 </td>
 
                 <td>
+                  <mat-form-field>
+                      <mat-label>Facultate</mat-label>
+                      <mat-select formControlName="facultate">
+                          <mat-option *ngFor="let facultate of studentiFacultate" [value]="facultate" >
+                            {{facultate}}
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                  <button type="button" mat-icon-button color="accent" *ngIf="checkIfFacultateIsEmpty()" (click)="resetSpecificFilter('facultate')">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+              </td>
+
+              <td><button mat-raised-button color="warn" type="button" (click)="resetFiltering()" [disabled]="checkIfFormIsEmpty()">Reset filters</button></td>
+
+            </tr>
+
+            <tr>
+              <td>
+                <mat-form-field>
+                    <mat-label>Finalizat</mat-label>
+                    <mat-select formControlName="finalizat">
+                        <mat-option *ngFor="let finalizat of studentiFinalizat" [value]="finalizat" >
+                          {{finalizat}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+                <button type="button" mat-icon-button color="accent" *ngIf="checkIfFinalizatIsEmpty()" (click)="resetSpecificFilter('finalizat')">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+            </td>
+
+                <td>
                     <mat-form-field>
                         <mat-label>Specializare</mat-label>
                         <mat-select formControlName="specializare">
@@ -45,6 +78,35 @@
                     </button>
                 </td>
 
+                <td>
+                  <mat-form-field>
+                      <mat-label>Grupa</mat-label>
+                      <mat-select formControlName="grupa">
+                          <mat-option *ngFor="let grupa of studentiGrupa" [value]="grupa" >
+                            {{grupa}}
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                  <button type="button" mat-icon-button color="accent" *ngIf="checkIfGrupaIsEmpty()" (click)="resetSpecificFilter('grupa')">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+              </td>
+
+              <td>
+                <mat-form-field>
+                    <mat-label>Subgrupa</mat-label>
+                    <mat-select formControlName="subgrupa">
+                        <mat-option *ngFor="let subgrupa of studentiSubgrupa" [value]="subgrupa" >
+                          {{subgrupa}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+                <button type="button" mat-icon-button color="accent" *ngIf="checkIfSubgrupaIsEmpty()" (click)="resetSpecificFilter('subgrupa')">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+            </td>
+
+          </tr>
             </table>
             <br><br>
         </form>
@@ -62,6 +124,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Prenume </th>
         <td id="prenumeColumn" mat-cell *matCellDef="let element"> {{element.prenume}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="facultate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Facultate </th>
+      <td id="facultateColumn" mat-cell *matCellDef="let element"> {{element.facultate}} </td>
+  </ng-container>
 
     <ng-container matColumnDef="specializare">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Specializare </th>
@@ -82,6 +149,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Subgrupa </th>
         <td id="subgrupaColumn" mat-cell *matCellDef="let element"> {{element.subgrupa}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="finalizat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Finalizat </th>
+      <td id="finalizatColumn" mat-cell *matCellDef="let element"> {{element.finalizat}} </td>
+  </ng-container>
 
     <ng-container matColumnDef="numarMatricol">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nr. Matricol </th>
