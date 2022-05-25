@@ -25,6 +25,9 @@ public class Student {
     @Column(name = "prenume")
     private String prenume;
 
+    @Column(name = "facultate")
+    private String facultate;
+
     @Column(name = "an_de_studiu")
     private Integer anDeStudiu;
 
@@ -36,6 +39,9 @@ public class Student {
 
     @Column(name = "subgrupa")
     private String subgrupa;
+
+    @Column(name = "finalizat")
+    private boolean finalizat;
 
     @Column(name = "numar_matricol")
     private String numarMatricol;
