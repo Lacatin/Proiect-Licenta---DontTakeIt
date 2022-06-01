@@ -6,6 +6,7 @@ import { StudentiDashboardComponent } from './studenti-dashboard/studenti-dashbo
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { StudentiPageComponent } from './studenti-dashboard/studenti-page/studenti-page.component';
 
 
 const ANGULAR_MATERIAL: any[] = [
@@ -34,6 +35,7 @@ const FUNCTIONAL_SERVICES: any[] = [];
         ...PAGES_AND_COMPONENTS_FOR_PAGES,
         ...MODALS,
         StudentiDashboardComponent,
+        StudentiPageComponent,
     ],
     imports: [
         ...ANGULAR_MATERIAL,

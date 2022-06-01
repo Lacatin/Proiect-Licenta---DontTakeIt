@@ -1,0 +1,77 @@
+<div class="content-wrapper">
+
+    <br>
+    <section class="content" *ngIf="student">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <mat-card>
+                        <mat-card-title>
+                          <div class="text-center">
+                            <mat-icon>
+                              account_circle
+                            </mat-icon>
+                          </div>
+            
+                          <h3 class="profile-username text-center">
+                            {{ student.nume }} {{ student.prenume }}
+                          </h3>
+                        </mat-card-title>
+                        <mat-card-content>
+                          <!-- <p class="text-muted text-center">{{ employee.band }}</p> -->
+            
+                          <ul class="list-group mb-3">
+                            <li class="list-group-item">
+                              <b>Facultate: </b> <a>{{ student.facultate }}</a>
+                            </li>
+                            <li class="list-group-item">
+                              <b>Specializare: </b> <a>{{ student.specializare }}</a>
+                            </li>
+                            <li class="list-group-item">
+                              <b>An: </b> <a>{{ student.anDeStudiu }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Grupa: </b> <a>{{ student.grupa }}</a>
+                              </li>
+                              <li class="list-group-item">
+                                <b>Subgrupa: </b> <a>{{ student.subgrupa }}</a>
+                              </li>
+                              <li class="list-group-item">
+                                <b>Finalizat: </b> <a>{{ student.finalizat }}</a>
+                              </li>
+                          </ul>
+                        </mat-card-content>
+                      </mat-card>
+
+                </div>  
+                
+                <mat-card>
+                    <mat-card-title>Lucrarile Studentului</mat-card-title>
+                    <mat-card-content>
+
+                            <mat-stepper orientation="vertical">
+                              <mat-step *ngFor="let lucrare of student.lucrari; let i = index">
+
+                                <ng-template matStepLabel>{{lucrare.nume}}</ng-template>
+                                <ng-template matStepContent>
+                                  <p>Nota: {{lucrare.nota}}<br></p>
+                                </ng-template>
+
+                              </mat-step>
+                            </mat-stepper>
+
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+
+            <div class="row">
+
+            </div>
+
+        </div>
+    </section>
+
+</div>
