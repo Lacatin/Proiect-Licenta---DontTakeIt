@@ -41,7 +41,7 @@ public class Student {
     private String subgrupa;
 
     @Column(name = "finalizat")
-    private boolean finalizat;
+    private String finalizat;
 
     @Column(name = "numar_matricol")
     private String numarMatricol;

@@ -45,8 +45,6 @@
                   </button>
               </td>
 
-              <td><button mat-raised-button color="warn" type="button" (click)="resetFiltering()" [disabled]="checkIfFormIsEmpty()">Reset filters</button></td>
-
             </tr>
 
             <tr>
@@ -62,7 +60,7 @@
                 <button type="button" mat-icon-button color="accent" *ngIf="checkIfFinalizatIsEmpty()" (click)="resetSpecificFilter('finalizat')">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
-            </td>
+              </td>
 
                 <td>
                     <mat-form-field>
@@ -104,9 +102,16 @@
                 <button type="button" mat-icon-button color="accent" *ngIf="checkIfSubgrupaIsEmpty()" (click)="resetSpecificFilter('subgrupa')">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
-            </td>
+              </td>
 
           </tr>
+
+          <tr>
+            <td><button mat-raised-button color="primary" type="submit" [disabled]="checkIfFormIsEmpty()">
+              <mat-icon>search</mat-icon>Search</button></td>
+            <td><button mat-raised-button color="warn" type="button" (click)="resetFiltering()" [disabled]="checkIfFormIsEmpty()">Reset filters</button></td>
+          </tr>
+
             </table>
             <br><br>
         </form>

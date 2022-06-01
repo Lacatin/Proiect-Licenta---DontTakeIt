@@ -84,6 +84,25 @@ columnsToDisplay: string[] = ['nume', 'prenume', 'facultate', 'specializare', 'a
 
   submitFiltering() {
 
+    this.initAutocompleteObs();
+    const urlString: string = '/studenti/filtered?';
+
+    const data = this.formGroup.value;
+
+    const params = Object.keys(this.formGroup.value).map(function (key) {
+      if (data[key] !== '' && data[key] !== null)
+        return [key, data[key]].map(encodeURIComponent).join("=");
+      else return null;
+    }).filter((data) => {
+      return data
+    }).join("&");
+
+    this.restService.get<Student[]>(urlString + params).subscribe(
+      (data:Student[]) => {
+        this.dataSource.data = data;
+      }
+    );
+
   }
 
   public checkIfNumeIsEmpty(): boolean {
@@ -125,6 +144,8 @@ columnsToDisplay: string[] = ['nume', 'prenume', 'facultate', 'specializare', 'a
     let dataForm = this.formGroup.value;
     return (dataForm.nume === "" || dataForm.nume === null)
       && (dataForm.prenume === "" || dataForm.prenume === null)
+      && (dataForm.facultate === "" || dataForm.facultate === null)
+      && (dataForm.finalizat === "" || dataForm.finalizat === null)
       && (dataForm.specializare === "" || dataForm.specializare === null)
       && (dataForm.grupa === "" || dataForm.grupa === null)
       && (dataForm.subgrupa === "" || dataForm.subgrupa === null);
@@ -132,6 +153,7 @@ columnsToDisplay: string[] = ['nume', 'prenume', 'facultate', 'specializare', 'a
 
   resetSpecificFilter(filterName:string): void {
     this.formGroup.controls[filterName].reset();
+    this.submitFiltering();
   }
 
   resetFiltering(): void {

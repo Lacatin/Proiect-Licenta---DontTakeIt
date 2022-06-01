@@ -3,6 +3,7 @@ package com.licenta.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,7 +18,8 @@ import java.time.LocalDateTime;
 public class Lucrare {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "lucrare_id")
     private Integer id;
 
@@ -25,6 +27,7 @@ public class Lucrare {
     private String nume;
 
     @Column(name = "continut")
+    @Lob
     private byte[] continut;
 
     @ManyToOne(fetch = FetchType.LAZY)
