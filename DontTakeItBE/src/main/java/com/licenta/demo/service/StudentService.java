@@ -9,6 +9,8 @@ import java.util.Set;
 
 public interface StudentService {
 
+    Student findById(int id);
+
     List<Student> findAll();
 
     Set<Student> filter(Map<String, String> params);

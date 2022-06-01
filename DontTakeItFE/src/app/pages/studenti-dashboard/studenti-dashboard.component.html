@@ -45,9 +45,6 @@
                   </button>
               </td>
 
-            </tr>
-
-            <tr>
               <td>
                 <mat-form-field>
                     <mat-label>Finalizat</mat-label>
@@ -61,6 +58,10 @@
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </td>
+
+            </tr>
+
+            <tr>
 
                 <td>
                     <mat-form-field>
@@ -122,7 +123,7 @@
 
     <ng-container matColumnDef="nume">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nume </th>
-        <td id="numeColumn" mat-cell *matCellDef="let element"> {{element.nume}} </td>
+        <td id="numeColumn" mat-cell *matCellDef="let element" routerLink="/studenti/{{element.id}}"> {{element.nume}} </td>
     </ng-container>
 
     <ng-container matColumnDef="prenume">

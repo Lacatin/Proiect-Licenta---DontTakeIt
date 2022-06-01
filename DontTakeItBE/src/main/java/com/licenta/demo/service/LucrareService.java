@@ -3,6 +3,7 @@ package com.licenta.demo.service;
 import com.licenta.demo.model.Lucrare;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface LucrareService {
@@ -11,7 +12,5 @@ public interface LucrareService {
 
      Lucrare findById(int id);
 
-     List<Lucrare> findAllByStudentId(int studentId);
-
-     void save(MultipartFile file);
+     String save(MultipartFile file, int id) throws IOException;
 }

@@ -22,9 +22,16 @@ public class StudentServiceImpl implements StudentService {
     private final StudentProvider studentProvider;
 
     @Override
+    public Student findById(int id) {
+        return studentProvider.findById(id);
+    }
+
+    @Override
     public List<Student> findAll() {
         return studentProvider.findAll();
     }
+
+
 
     @Override
     public Set<Student> filter(Map<String, String> params) {
