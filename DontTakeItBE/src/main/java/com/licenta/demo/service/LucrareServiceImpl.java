@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,7 +45,7 @@ public class LucrareServiceImpl implements LucrareService {
     }
 
     @Override
-    public String save(MultipartFile file, int studentId) throws IOException {
+    public String save(MultipartFile file, Integer studentId) throws IOException {
 
         if (null == file.getOriginalFilename()) {
             throw new WrongFileUploadedException("Lucrarea nu s-a putut incarca. Asigura-te ca totul este in regula.");
@@ -52,7 +55,9 @@ public class LucrareServiceImpl implements LucrareService {
             byte[] bytes = file.getBytes();
             Path filename = Paths.get(file.getOriginalFilename());
             Path fullPath = Path.of(pdfPath, filename.toString());
-            Files.write(fullPath, bytes);
+            OutputStream outputStream = new FileOutputStream(new File(pdfPath, filename.toString()));
+            outputStream.write(bytes);
+            outputStream.close();
 
             //saving the file path and other details in DB
             Student student = studentService.findById(studentId);

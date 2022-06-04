@@ -1,34 +1,31 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AlertPopUpComponent } from '~shared/alert-pop-up/alert-pop-up.component';
-import { Student } from '~shared/model/student-model';
 import { RestService } from '~shared/services/rest-service';
-import {saveAs} from 'file-saver';
 
 @Component({
-  selector: 'app-studenti-page',
-  templateUrl: './studenti-page.component.html',
-  styleUrls: ['./studenti-page.component.scss']
+  selector: 'app-import-lucrare',
+  templateUrl: './import-lucrare.component.html',
+  styleUrls: ['./import-lucrare.component.scss']
 })
-export class StudentiPageComponent implements OnInit {
 
-  student: Student;
-  studentId: string;
-  url: string = "/studenti/";
-  
+
+export class ImportLucrareComponent implements OnInit {
+
+  fileAttr = '';
   selectedFiles?: FileList;
+  isFileLoading: boolean = false;
   currentFile?: File;
   message = '';
   errorMsg = '';
-  isFileLoading: Boolean = false;
 
-  constructor(
-    private restService: RestService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
-  ) { }
+  studentId: string;
+
+  @ViewChild('fileUpload') inputValue: any;
+
+  constructor(private restService: RestService, public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -37,14 +34,7 @@ export class StudentiPageComponent implements OnInit {
           this.studentId = paramMap.get('id')!;
       }
     );
-
-    this.url += this.studentId;
-    this.restService.get<Student>(this.url).subscribe(
-      (data:Student) => {
-        this.student = data;
-        console.log(this.student);
-      }
-    )
+    
   }
 
   openDialog(status: string, message: string) {
@@ -53,42 +43,40 @@ export class StudentiPageComponent implements OnInit {
     dialogRef.componentInstance.message = message;
   }
 
+  selectFile(event: any): void {
+    this.isFileLoading = true;
+    this.selectedFiles = event.target.files;
+    this.upload();
+    this.inputValue.nativeElement.value = '';
+  }
+
   upload(): void {
     this.errorMsg = '';
-
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
       if (file) {
         this.currentFile = file;
-
+        this.fileAttr = file.name;
         this.restService.upload(this.currentFile, this.studentId).subscribe(
           (event: any) => {
             if (event instanceof HttpResponse) {
-              this.isFileLoading = false;
-              const file = event.body;
-              if (event.status !== 200)
-                this.errorMsg = "Fisierul nu s-a putut incarca";
-              else
+              if (event.ok) {
                 this.message = "Lucrare incarcata cu succes!";
+                this.openDialog("Success", this.message);
+                this.isFileLoading = false;
+              }
             }
           },
           (err: any) => {
-
-            if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Error occurred while uploading a file!';
-            }
-
-            this.currentFile = undefined;
+                this.message = "Lucrarea nu s-a putut incarca!";
+                this.openDialog("Error", this.message);
+                this.currentFile = undefined;
+                this.isFileLoading = false;
           });
       }
-
       this.selectedFiles = undefined;
     }
   }
 
-
 }
-

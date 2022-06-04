@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -19,4 +19,17 @@ export class RestService{
 
         return this.httpClient.get<T>(fullUrl).pipe(map((response: T) => response));
     }
+
+    upload(file: File, studentId: string): Observable<HttpEvent<any>> {
+        const formData: FormData = new FormData();
+    
+        formData.append('file', file);
+    
+        const req = new HttpRequest('POST', this.baseUrl + "/lucrari/" + studentId, formData, {
+          reportProgress: true,
+          responseType: "blob"
+        });
+    
+        return this.httpClient.request(req);
+      }
 }

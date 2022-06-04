@@ -1,0 +1,8 @@
+<button mat-flat-button color="primary" (click)="fileUpload.click()" color="accent">
+    Importa Lucrare
+</button>
+
+<mat-spinner *ngIf="isFileLoading" [diameter]="35" color="accent"></mat-spinner>
+
+<input type="file" (change)="selectFile($event)" #fileUpload style="display: none;"
+     accept="application/pdf"/>
