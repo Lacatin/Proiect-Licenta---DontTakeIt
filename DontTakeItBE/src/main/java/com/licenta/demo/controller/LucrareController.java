@@ -2,7 +2,6 @@ package com.licenta.demo.controller;
 
 
 import com.licenta.demo.model.Lucrare;
-import com.licenta.demo.repository.LucrareRepository;
 import com.licenta.demo.service.LucrareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

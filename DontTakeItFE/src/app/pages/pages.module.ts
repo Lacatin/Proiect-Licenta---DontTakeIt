@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { StudentiPageComponent } from './studenti-dashboard/studenti-page/studenti-page.component';
 import { ImportLucrareComponent } from './studenti-dashboard/studenti-page/import-lucrare/import-lucrare.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { StudentiComparareComponent } from './studenti-comparare/studenti-comparare.component';
 
 
 const ANGULAR_MATERIAL: any[] = [
@@ -48,6 +49,7 @@ const FUNCTIONAL_SERVICES: any[] = [];
         StudentiPageComponent,
         AlertPopUpComponent,
         ImportLucrareComponent,
+        StudentiComparareComponent,
     ],
     imports: [
         ...ANGULAR_MATERIAL,
