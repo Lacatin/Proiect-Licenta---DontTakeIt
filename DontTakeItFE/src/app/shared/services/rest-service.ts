@@ -31,5 +31,11 @@ export class RestService{
         });
     
         return this.httpClient.request(req);
-      }
+    }
+
+    seteazaNota(lucrareId: number, nota: string) {
+      let fullUrl = this.baseUrl + '/lucrari' + '/' + lucrareId + '/' + nota;
+      return this.httpClient.post(fullUrl, { responseType: 'text' });
+    }
+
 }

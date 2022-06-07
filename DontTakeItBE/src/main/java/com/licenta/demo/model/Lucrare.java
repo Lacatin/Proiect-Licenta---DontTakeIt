@@ -27,6 +27,9 @@ public class Lucrare {
     @Column(name = "path_file_name")
     private String pathFileName;
 
+    @Column(name = "server_path")
+    private String serverPath;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     @JsonIgnore

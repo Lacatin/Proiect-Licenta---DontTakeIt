@@ -1,0 +1,24 @@
+@use '~@angular/material/index' as mat;
+@import "~styles/styles-variables";
+
+@mixin studenti-dashboard-theme($theme) {
+  $primary: map-get($theme, primary);
+  $primary-lighter: mat.get-color-from-palette($primary, lighter);
+  $is-dark: map-get($theme, is-dark);
+ 
+  .highlight{
+    &.active {
+      background-color: mat.get-color-from-palette($primary, lighter);
+      outline: none;
+
+      &.mat-icon {
+        color: mat.get-color-from-palette($primary, main);
+      }
+    }
+
+    &:hover {
+      background-color: mat.get-color-from-palette($primary, lighter);
+      cursor:pointer;
+    }
+  }
+}

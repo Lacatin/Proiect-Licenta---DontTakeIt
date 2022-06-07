@@ -20,8 +20,6 @@
                           </h3>
                         </mat-card-title>
                         <mat-card-content>
-                          <!-- <p class="text-muted text-center">{{ employee.band }}</p> -->
-            
                           <ul class="list-group mb-3">
                             <li class="list-group-item">
                               <b>Facultate: </b> <a>{{ student.facultate }}</a>
@@ -47,20 +45,44 @@
 
                 </div>  
                 
-                <mat-card>
-                    <mat-card-title>Lucrarile Studentului</mat-card-title>
+                <mat-card class="spatiu-lucrari">
+                    <mat-card-title>Note si lucrarile studentului</mat-card-title>
+                    <br>
                     <mat-card-content>
 
-                            <mat-stepper orientation="vertical">
-                              <mat-step *ngFor="let lucrare of student.lucrari; let i = index">
+                              <ng-container *ngFor="let lucrare of student.lucrari; let i = index"> 
 
-                                <ng-template matStepLabel>{{lucrare.nume}}</ng-template>
-                                <ng-template matStepContent>
-                                  <p>Nota: {{lucrare.nota}}<br></p>
-                                </ng-template>
+                                <ng-container *ngIf="lucrare.nota!=null">
+                                  <a class="link" [href]="sanitize(lucrare.serverPath)" target="_blank" rel="noreferrer noopener">
+                                    {{lucrare.nume}} 
+                                  </a> &nbsp;&nbsp; - &nbsp;&nbsp;Nota: &nbsp; {{lucrare.nota}}
+                                </ng-container>
 
-                              </mat-step>
-                            </mat-stepper>
+                                <ng-container *ngIf="lucrare.nota==null">
+                                  <a class="link" [href]="sanitize(lucrare.serverPath)" target="_blank" rel="noreferrer noopener">
+                                    {{lucrare.nume}} 
+                                  </a>
+                                  <br>
+                                  <br>
+                                  
+                                  <form [formGroup]="formGroup" (submit)="trimiteNota(lucrare, i)">
+                                    <mat-form-field class="nota">
+                                      <mat-label>Nota</mat-label>
+                                      <mat-select [formControlName]="i">
+                                        <mat-label>Nota</mat-label>
+                                        <mat-option *ngFor="let nota of counter(10); let n = index" [value]="n+1" >
+                                          {{n+1}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                    <td><button mat-raised-button color="primary" type="submit" [disabled]="checkIfFormIsEmpty(i)">Seteaza nota</button></td>
+                                  </form>
+                                </ng-container>
+                                 
+                                 <br>
+                                 <br>
+                                
+                              </ng-container>
 
                     </mat-card-content>
                 </mat-card>

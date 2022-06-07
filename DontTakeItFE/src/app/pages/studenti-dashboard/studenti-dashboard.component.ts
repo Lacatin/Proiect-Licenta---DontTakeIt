@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { List } from 'lodash';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Student } from '~shared/model/student-model';
 import { RestService } from '~shared/services/rest-service';
+
 
 @Component({
   selector: 'app-studenti-dashboard',
@@ -30,7 +30,7 @@ studentiFacultate: Set<string> = new Set();
 studentiFinalizat: Set<boolean> = new Set();
 
 dataSource: MatTableDataSource<Student>;
-columnsToDisplay: string[] = ['nume', 'prenume', 'facultate', 'specializare', 'anDeStudiu', 'grupa', 'subgrupa', 'finalizat', 'numarMatricol', 'lucrari'];
+columnsToDisplay: string[] = ['nume', 'prenume', 'facultate', 'specializare', 'anDeStudiu', 'grupa', 'subgrupa', 'finalizat', 'numarMatricol'];
 
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;

@@ -9,6 +9,8 @@
 @import 'app/shared/header/containers/header/header.component.scss-theme';
 @import 'app/shared/sidebar/sidebar.component.scss-theme';
 @import 'app/shared/footer/footer.component.scss-theme';
+@import 'app/pages/studenti-dashboard/studenti-page/studenti-page.component.scss-theme.scss';
+@import 'app/pages/studenti-dashboard/studenti-dashboard.scss-theme.scss';
 
 
 // global mixin
@@ -20,6 +22,8 @@
   @include header-component-theme($theme);
   @include sidebar-component-theme($theme);
   @include footer-component-theme($theme);
+  @include studenti-page-theme($theme);
+  @include studenti-dashboard-theme($theme);
 }
 
 @include custom-components-theme($theme);

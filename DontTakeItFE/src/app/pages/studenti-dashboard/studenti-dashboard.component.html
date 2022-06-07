@@ -8,7 +8,7 @@
                       <input type="text" placeholder="Nume" matInput formControlName="nume" [matAutocomplete]="autoStudentiNume">
                     </mat-form-field>
                     <mat-autocomplete autoActiveFirstOption #autoStudentiNume="matAutocomplete">
-                        <mat-option *ngFor="let option of studentiNumeOptions | async" [value]="option">
+                        <mat-option *ngFor="let option of studentiNumeOptions | async; let i = index" [value]="option">
                           {{option}}
                         </mat-option>
                       </mat-autocomplete>
@@ -38,7 +38,7 @@
                           <mat-option *ngFor="let facultate of studentiFacultate" [value]="facultate" >
                             {{facultate}}
                           </mat-option>
-                        </mat-select>
+                      </mat-select>
                   </mat-form-field>
                   <button type="button" mat-icon-button color="accent" *ngIf="checkIfFacultateIsEmpty()" (click)="resetSpecificFilter('facultate')">
                     <mat-icon>delete_outline</mat-icon>
@@ -165,12 +165,6 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nr. Matricol </th>
         <td id="numarMatricolColumn" mat-cell *matCellDef="let element"> {{element.numarMatricol}} </td>
     </ng-container>
-
-    <ng-container matColumnDef="lucrari">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lucrari </th>
-        <td id="lucrariColumn" mat-cell *matCellDef="let element"> {{element.lucrari}} </td>
-    </ng-container>
-
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay" class="highlight" ></tr>

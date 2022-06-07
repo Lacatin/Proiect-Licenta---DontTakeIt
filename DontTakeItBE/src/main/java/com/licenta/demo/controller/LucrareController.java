@@ -34,4 +34,10 @@ public class LucrareController {
     private ResponseEntity<String> save(@RequestParam MultipartFile file, @PathVariable Integer studentId) throws IOException {
         return new ResponseEntity<>(lucrareService.save(file, studentId), HttpStatus.OK);
     }
+
+    @PostMapping("/{lucrareId}/{nota}")
+    private void seteazaNota(@PathVariable Integer lucrareId, @PathVariable String nota) throws IOException {
+        lucrareService.seteazaNota(lucrareId, Integer.valueOf(nota));
+    }
+
 }

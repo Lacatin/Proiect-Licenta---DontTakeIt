@@ -13,4 +13,6 @@ public interface LucrareService {
      Lucrare findById(int id);
 
      String save(MultipartFile file, Integer id) throws IOException;
+
+     void seteazaNota(Integer id, Integer nota);
 }

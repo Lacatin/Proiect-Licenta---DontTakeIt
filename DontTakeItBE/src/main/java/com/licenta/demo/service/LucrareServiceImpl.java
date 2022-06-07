@@ -26,8 +26,11 @@ import java.util.List;
 @Transactional
 public class LucrareServiceImpl implements LucrareService {
 
-    @Value("${pdf.path}")
-    private String pdfPath;
+    @Value("${pdf.pc.path}")
+    private String pdfPcPath;
+
+    @Value("${pdf.server.path}")
+    private String pdfServerPath;
 
     private final LucrareRepository lucrareRepository;
     private final StudentServiceImpl studentService;
@@ -54,8 +57,8 @@ public class LucrareServiceImpl implements LucrareService {
             //saving the file on the server computer
             byte[] bytes = file.getBytes();
             Path filename = Paths.get(file.getOriginalFilename());
-            Path fullPath = Path.of(pdfPath, filename.toString());
-            OutputStream outputStream = new FileOutputStream(new File(pdfPath, filename.toString()));
+            Path fullPath = Path.of(pdfPcPath, filename.toString());
+            OutputStream outputStream = new FileOutputStream(new File(pdfPcPath, filename.toString()));
             outputStream.write(bytes);
             outputStream.close();
 
@@ -67,6 +70,7 @@ public class LucrareServiceImpl implements LucrareService {
                     .dataDepunerii(LocalDateTime.now())
                     .nota(null)
                     .pathFileName(fullPath.toString())
+                    .serverPath(pdfServerPath + file.getOriginalFilename())
                     .student(student)
                     .build();
 
@@ -75,4 +79,15 @@ public class LucrareServiceImpl implements LucrareService {
         return "Lucrare incarcata cu succes!";
 
     }
+
+    @Override
+    public void seteazaNota(Integer id, Integer nota) {
+
+        Lucrare lucrare = this.findById(id);
+        lucrare.setNota(nota);
+        lucrareRepository.save(lucrare);
+
+//        return "Ati setat nota " + nota + " la lucrarea " + lucrare.getNume();
+    }
+
 }

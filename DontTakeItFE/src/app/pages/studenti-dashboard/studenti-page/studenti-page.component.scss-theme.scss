@@ -1,0 +1,60 @@
+@use '~@angular/material/index' as mat;
+@import "~styles/styles-variables";
+
+@mixin studenti-page-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  $background: map-get($theme, 'background');
+  $is-dark: map-get($theme, is-dark);
+
+  .nav-item {
+    &:hover {
+      border-radius: 5px;
+      background-color: mat.get-color-from-palette($primary, lighter);
+      cursor: pointer;
+    }
+    .nav-link {
+      color: black;
+      &.active {
+        border-radius: 5px;
+        background-color: mat.get-color-from-palette($primary, main);
+        color: white;
+        outline: none;
+      }
+      @if $is-dark {
+        color: white;
+      }
+    }
+  }
+  
+  .mat-card {
+    .mat-icon {
+      color: mat.get-color-from-palette($primary, main);
+      font-size: 48px;
+      margin: auto;
+      width: auto;
+      text-align: center;
+      ;
+    }
+
+    .mat-card-content {
+      .list-group-item {
+        // background-color: mat.get-color-from-palette($secondary, dark-background);
+        background-color: mat.get-color-from-palette($background, 'background');
+        @if $is-dark {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .card {
+    border-color: mat.get-color-from-palette($background, 'background');
+    .card-body {
+     background-color: mat.get-color-from-palette($background, 'background');
+    }
+    @if $is-dark {
+          color: white;
+    } 
+  }   
+}

@@ -6,6 +6,9 @@ import { AlertPopUpComponent } from '~shared/alert-pop-up/alert-pop-up.component
 import { Student } from '~shared/model/student-model';
 import { RestService } from '~shared/services/rest-service';
 import {saveAs} from 'file-saver';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Lucrare } from '~shared/model/lucrare-model';
 
 @Component({
   selector: 'app-studenti-page',
@@ -16,7 +19,11 @@ export class StudentiPageComponent implements OnInit {
 
   student: Student;
   studentId: string;
+  numeLucrariStudent: string[] = [];
+
   url: string = "/studenti/";
+
+  formGroup: FormGroup;
   
   selectedFiles?: FileList;
   currentFile?: File;
@@ -27,7 +34,9 @@ export class StudentiPageComponent implements OnInit {
   constructor(
     private restService: RestService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +48,23 @@ export class StudentiPageComponent implements OnInit {
     );
 
     this.url += this.studentId;
+
     this.restService.get<Student>(this.url).subscribe(
       (data:Student) => {
         this.student = data;
-        console.log(this.student);
+
+        for (let l of this.student.lucrari) {
+          this.numeLucrariStudent.push(l.nume);
+        }
+    
+        this.formGroup = this.formBuilder.group({
+          ...this.numeLucrariStudent,
+        });
+
+        this.formGroup.reset();
+
       }
-    )
+    );
   }
 
   openDialog(status: string, message: string) {
@@ -88,6 +108,35 @@ export class StudentiPageComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
+
+  public checkIfFormIsEmpty(i: number): boolean {
+    let dataForm = this.formGroup.value;
+    return (dataForm[i] === "" || dataForm[i] === null)
+  }
+
+  trimiteNota(lucrare: Lucrare, i: number) {
+
+    console.log(this.formGroup);
+
+    let nota: string  = this.formGroup.controls[i].value
+
+    console.log(nota);
+    
+
+    this.restService.seteazaNota(lucrare.id, nota).subscribe(
+      data => this.openDialog("Succes!", "Ati setat nota " + nota + " lucrarii " + lucrare.nume +". Pentru a vedea schimbarile in pagina, dati refresh."),
+      error => this.openDialog("Eroare!", "Nota nu s-a putut seta! Incercati din nou!")
+    )
+  }
+
+  sanitize(url:string){
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+}
+
+counter(i: number) {
+  return new Array(i);
+}
+
 
 
 }
