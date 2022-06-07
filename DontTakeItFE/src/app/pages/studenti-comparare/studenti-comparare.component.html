@@ -1,36 +1,70 @@
 <form [formGroup]="formGroup">
 
+    <div class="student1">
+        <div>
+            <mat-form-field>
+                <input type="text" placeholder="Nr. Matricol" matInput formControlName="nrMatricolA" [matAutocomplete]="autoStudentiNrMatricolA">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiNrMatricolA="matAutocomplete">
+                <mat-option *ngFor="let option of studentiNrMatricolAOptions | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolAIsEmpty()" (click)="resetSpecificFilter('nrMatricolA')">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolAIsEmpty()" (click)="submitNrMatricolA()">
+                Filtreaza Lucrari
+            </button>
+        </div>
+    
+        <div>
+            <mat-form-field>
+                <input type="text" placeholder="Lucrari" matInput formControlName="lucrare1" [matAutocomplete]="autoStudentiLucrare1">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiLucrare1="matAutocomplete">
+                <mat-option *ngFor="let option of studentiLucrari1Options | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrari1IsEmpty()" (click)="resetSpecificFilter('lucrare1')">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+        </div>
 
-    <div class="nr-matricol1">
-        <mat-form-field>
-            <input type="text" placeholder="Nr. Matricol" matInput formControlName="nrMatricolA" [matAutocomplete]="autoStudentiNrMatricolA">
-        </mat-form-field>
-        <mat-autocomplete autoActiveFirstOption #autoStudentiNrMatricolA="matAutocomplete">
-            <mat-option *ngFor="let option of studentiNrMatricolAOptions | async; let i = index" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-        <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolAIsEmpty()" (click)="resetSpecificFilter('nrMatricolA')">
-        <mat-icon>delete_outline</mat-icon>
-        </button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolAIsEmpty()" (click)="submitNrMatricolA()">
-            Filtreaza Lucrari
-        </button>
     </div>
 
-    <div class="lucrari">
-        <mat-form-field>
-            <input type="text" placeholder="Lucrari" matInput formControlName="lucrare1" [matAutocomplete]="autoStudentiLucrare1">
-        </mat-form-field>
-        <mat-autocomplete autoActiveFirstOption #autoStudentiLucrare1="matAutocomplete">
-            <mat-option *ngFor="let option of studentiLucrari1Options | async; let i = index" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-        <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrari1IsEmpty()" (click)="resetSpecificFilter('lucrare1')">
-        <mat-icon>delete_outline</mat-icon>
-        </button>
-    </div>
+    <div class="student2">
+        <div>
+            <mat-form-field>
+                <input type="text" placeholder="Nr. Matricol" matInput formControlName="nrMatricolB" [matAutocomplete]="autoStudentiNrMatricolB">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiNrMatricolB="matAutocomplete">
+                <mat-option *ngFor="let option of studentiNrMatricolBOptions | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolBIsEmpty()" (click)="resetSpecificFilter('nrMatricolB')">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolBIsEmpty()" (click)="submitNrMatricolB()">
+                Filtreaza Lucrari
+            </button>
+        </div>
 
+        <div class="lucrari2">
+            <mat-form-field>
+                <input type="text" placeholder="Lucrari" matInput formControlName="lucrare2" [matAutocomplete]="autoStudentiLucrare2">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiLucrare2="matAutocomplete">
+                <mat-option *ngFor="let option of studentiLucrari2Options | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrari2IsEmpty()" (click)="resetSpecificFilter('lucrare2')">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+        </div>
+    </div>
 
 </form>
