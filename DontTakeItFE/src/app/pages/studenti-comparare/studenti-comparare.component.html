@@ -13,11 +13,11 @@
             <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolAIsEmpty()" (click)="resetSpecificFilter('nrMatricolA')">
             <mat-icon>delete_outline</mat-icon>
             </button>
-            <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolAIsEmpty()" (click)="submitNrMatricolA()">
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolAIsEmpty()" (click)="submitNrMatricolA()">
                 Filtreaza Lucrari
             </button>
         </div>
-    
+        <br>
         <div>
             <mat-form-field>
                 <input type="text" placeholder="Lucrari" matInput formControlName="lucrare1" [matAutocomplete]="autoStudentiLucrare1">
@@ -27,8 +27,12 @@
                     {{option}}
                 </mat-option>
             </mat-autocomplete>
-            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrari1IsEmpty()" (click)="resetSpecificFilter('lucrare1')">
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrare1IsEmpty()" (click)="resetLucrare1Filter()">
             <mat-icon>delete_outline</mat-icon>
+            </button>
+            <br>
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfLucrare1IsEmpty()" (click)="submitLucrare1()">
+                Alege Lucrarea
             </button>
         </div>
 
@@ -47,11 +51,11 @@
             <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolBIsEmpty()" (click)="resetSpecificFilter('nrMatricolB')">
             <mat-icon>delete_outline</mat-icon>
             </button>
-            <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolBIsEmpty()" (click)="submitNrMatricolB()">
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolBIsEmpty()" (click)="submitNrMatricolB()">
                 Filtreaza Lucrari
             </button>
         </div>
-
+        <br>
         <div class="lucrari2">
             <mat-form-field>
                 <input type="text" placeholder="Lucrari" matInput formControlName="lucrare2" [matAutocomplete]="autoStudentiLucrare2">
@@ -61,10 +65,28 @@
                     {{option}}
                 </mat-option>
             </mat-autocomplete>
-            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrari2IsEmpty()" (click)="resetSpecificFilter('lucrare2')">
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrare2IsEmpty()" (click)="resetLucrare1Filter()">
             <mat-icon>delete_outline</mat-icon>
+            </button>
+            <br>
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfLucrare2IsEmpty()" (click)="submitLucrare2()">
+                Alege Lucrarea
             </button>
         </div>
     </div>
+
+    <div class="compara-deschide">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!(checkIfLucrare1IsEmpty() && checkIfLucrare2IsEmpty())" (click)="submit()">
+            Compara Lucrarile
+        </button>
+        
+        <mat-spinner *ngIf="areFilesComparing" [diameter]="35" color="accent"></mat-spinner>
+
+        <button style="margin-left: 0.8vw;" type="button" mat-raised-button color="primary" *ngIf="filesCompared" (click)="afiseazaProcent()">
+            Vezi Rezultatul
+        </button>
+    </div>
+
+    <h2 class="similaritate" *ngIf="afiseazaSimilaritatea">{{procentSimilaritate | number}} %</h2>
 
 </form>

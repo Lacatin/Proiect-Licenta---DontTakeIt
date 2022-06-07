@@ -38,4 +38,10 @@ export class RestService{
       return this.httpClient.post(fullUrl, { responseType: 'text' });
     }
 
+    comparaLucrari(id1: number, id2: number): Observable<number> {
+      let fullUrl = this.baseUrl + '/lucrari/comparare' + "?id1=" + id1 + "&id2=" + id2;
+      return this.httpClient.get<number>(fullUrl).pipe(map((response: number) => response));
+    }
+
+
 }
