@@ -6,18 +6,18 @@ import com.licenta.demo.model.Lucrare;
 import com.licenta.demo.model.Student;
 import com.licenta.demo.repository.LucrareRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,6 +31,8 @@ public class LucrareServiceImpl implements LucrareService {
 
     @Value("${pdf.server.path}")
     private String pdfServerPath;
+
+    private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 
     private final LucrareRepository lucrareRepository;
     private final StudentServiceImpl studentService;
@@ -87,7 +89,35 @@ public class LucrareServiceImpl implements LucrareService {
         lucrare.setNota(nota);
         lucrareRepository.save(lucrare);
 
-//        return "Ati setat nota " + nota + " la lucrarea " + lucrare.getNume();
+    }
+
+    @Override
+    public Double comparaLucrarile(Integer id1, Integer id2) throws IOException {
+
+        Lucrare lucrare1 = this.findById(id1);
+        Lucrare lucrare2 = this.findById(id2);
+
+        PDFTextStripper stripper = new PDFTextStripper();
+        PDDocument pdf1 = PDDocument.load(new File(lucrare1.getPathFileName()));
+        PDDocument pdf2 = PDDocument.load(new File(lucrare2.getPathFileName()));
+        String textPdf1 = stripper.getText(pdf1);
+        String textPdf2 = stripper.getText(pdf2);
+
+        Double rezultat = calculeazaProcentul(textPdf1, textPdf2) * 100;
+        dfZero.format(rezultat);
+
+        return rezultat;
+
+    }
+
+    public static double calculeazaProcentul(String first, String second) {
+
+        double maxLength = Double.max(first.length(), second.length());
+        if (maxLength > 0) {
+            LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+            return (maxLength - levenshteinDistance.apply(first, second)) / maxLength;
+        }
+        return 1.0;
     }
 
 }

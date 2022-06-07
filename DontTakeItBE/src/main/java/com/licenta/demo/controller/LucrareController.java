@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,6 +39,11 @@ public class LucrareController {
     @PostMapping("/{lucrareId}/{nota}")
     private void seteazaNota(@PathVariable Integer lucrareId, @PathVariable String nota) throws IOException {
         lucrareService.seteazaNota(lucrareId, Integer.valueOf(nota));
+    }
+
+    @GetMapping("/comparare")
+    private ResponseEntity<Double> comparaLucari(@RequestParam Integer id1, @RequestParam Integer id2) throws IOException {
+        return new ResponseEntity<>(lucrareService.comparaLucrarile(id1, id2), HttpStatus.OK);
     }
 
 }

@@ -16,6 +16,15 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>GroupDocsJavaAPI</id>
+			<name>GroupDocs Java API</name>
+			<url>http://repository.groupdocs.com/repo/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -31,6 +40,24 @@
 		</dependency>
 
 		<dependency>
+			<groupId>de.redsix</groupId>
+			<artifactId>pdfcompare</artifactId>
+			<version>1.1.61</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.testautomationguru.pdfutil</groupId>
+			<artifactId>pdf-util</artifactId>
+			<version>0.0.3</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
@@ -40,6 +67,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.groupdocs</groupId>
+			<artifactId>groupdocs-comparison</artifactId>
+			<version>20.4</version>
+		</dependency>
+
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.security</groupId>-->
 <!--			<artifactId>spring-security-test</artifactId>-->
@@ -50,6 +84,11 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version>
 		</dependency>
 	</dependencies>
 
