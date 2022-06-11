@@ -1,7 +1,7 @@
 import { Student } from "./student-model";
 
 
-export class Lucrare{
+export class Lucrare {
     id:             number;
     nume:           string;
     pathFileName:   string;

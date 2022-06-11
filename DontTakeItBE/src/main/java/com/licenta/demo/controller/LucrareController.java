@@ -2,6 +2,7 @@ package com.licenta.demo.controller;
 
 
 import com.licenta.demo.model.Lucrare;
+import com.licenta.demo.model.LucrareSimilara;
 import com.licenta.demo.service.LucrareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +42,14 @@ public class LucrareController {
         lucrareService.seteazaNota(lucrareId, Integer.valueOf(nota));
     }
 
-    @GetMapping("/comparare")
+    @GetMapping("/comparare-lucrari")
     private ResponseEntity<Double> comparaLucari(@RequestParam Integer id1, @RequestParam Integer id2) throws IOException {
         return new ResponseEntity<>(lucrareService.comparaLucrarile(id1, id2), HttpStatus.OK);
+    }
+
+    @GetMapping("/comparare-lucrare")
+    private ResponseEntity<LucrareSimilara> comparaLucare(@RequestParam Integer id1) throws IOException {
+        return new ResponseEntity<>(lucrareService.comparaLucrararea(id1), HttpStatus.OK);
     }
 
 }

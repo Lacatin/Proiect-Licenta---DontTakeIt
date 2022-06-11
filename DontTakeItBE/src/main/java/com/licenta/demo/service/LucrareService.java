@@ -1,6 +1,7 @@
 package com.licenta.demo.service;
 
 import com.licenta.demo.model.Lucrare;
+import com.licenta.demo.model.LucrareSimilara;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
@@ -19,5 +20,7 @@ public interface LucrareService {
      void seteazaNota(Integer id, Integer nota);
 
      Double comparaLucrarile(Integer id1, Integer id2) throws IOException;
+
+     LucrareSimilara comparaLucrararea(Integer id1) throws IOException;
 
 }

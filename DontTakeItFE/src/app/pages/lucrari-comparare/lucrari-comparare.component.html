@@ -1,0 +1,56 @@
+<form [formGroup]="formGroup">
+    <div class="student">
+        <div>
+            <mat-form-field>
+                <input type="text" placeholder="Nr. Matricol" matInput formControlName="nrMatricol" [matAutocomplete]="autoStudentiNrMatricol">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiNrMatricol="matAutocomplete">
+                <mat-option *ngFor="let option of studentiNrMatricolOptions | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfNrMatricolIsEmpty()" (click)="resetSpecificFilter('nrMatricol')">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolIsEmpty()" (click)="submitNrMatricol()">
+                Filtreaza lucrari
+            </button>
+        </div>
+        <br>
+        <div>
+            <mat-form-field>
+                <input type="text" placeholder="Lucrari" matInput formControlName="lucrare" [matAutocomplete]="autoStudentiLucrare1">
+            </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #autoStudentiLucrare1="matAutocomplete">
+                <mat-option *ngFor="let option of studentiLucrariOptions | async; let i = index" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+            <button type="button" mat-icon-button color="accent" *ngIf="checkIfLucrareIsEmpty()" (click)="resetLucrareFilter()">
+            <mat-icon>delete_outline</mat-icon>
+            </button>
+            <br>
+            <button type="button" mat-raised-button color="primary" [disabled]="!checkIfLucrareIsEmpty()" (click)="submitLucrare()">
+                Alege lucrarea
+            </button>
+        </div>
+
+        <button type="submit" mat-raised-button color="primary" [disabled]="!checkIfLucrareIsEmpty()" (click)="submit()">
+            Compara lucrarile
+        </button>
+
+        <br>
+        <mat-spinner *ngIf="areFilesComparing" [diameter]="35" color="accent"></mat-spinner>
+
+        <button type="button" mat-raised-button color="primary" *ngIf="filesCompared" (click)="afiseazaLucrarea()">
+            Vezi rezultatul
+        </button>
+
+    </div>
+
+    <p *ngIf="afiseazaLucrareaSimilara">Cea mai similara lucrare existenta in baza de date actuala are coeficientul de plagiatura egal cu procentul de mai jos.</p>
+    <p *ngIf="afiseazaLucrareaSimilara">Lucrarea {{lucrareStudent.nume}} ce apartine studentului {{student.nume}} este similara in proporție de {{lucrareSimilara.procentDeSimilaritate}} cu lucrarea {{ceaMaiSimilaraLucrare.nume}} a studentului {{studentCuLucrareSimilara.nume}} {{studentCuLucrareSimilara.prenume}}</p>
+
+    <h2 class="similaritate-procent" *ngIf="afiseazaLucrareaSimilara">{{lucrareSimilara.procentDeSimilaritate | number}} %</h2>
+
+</form>

@@ -3,6 +3,7 @@ package com.licenta.demo.service;
 import com.licenta.demo.exceptions.NotFoundException;
 import com.licenta.demo.exceptions.WrongFileUploadedException;
 import com.licenta.demo.model.Lucrare;
+import com.licenta.demo.model.LucrareSimilara;
 import com.licenta.demo.model.Student;
 import com.licenta.demo.repository.LucrareRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -108,6 +110,34 @@ public class LucrareServiceImpl implements LucrareService {
 
         return rezultat;
 
+    }
+    @Override
+    public  LucrareSimilara comparaLucrararea(Integer id1) throws IOException {
+
+        Lucrare lucrare = this.findById(id1);
+        LucrareSimilara lucrareSimilara = new LucrareSimilara(null, 0d);
+
+        List<Student> studenti = this.studentService
+                .findAll()
+                .stream()
+                .filter(s -> s.getSpecializare().equals(lucrare.getStudent().getSpecializare())).collect(Collectors.toList());
+
+        studenti.forEach(student -> {
+            if (!student.getId().equals(lucrare.getStudent().getId())) {
+                student.getLucrari().forEach(l -> {
+                    try {
+                        if (lucrareSimilara.getProcentDeSimilaritate() < this.comparaLucrarile(id1, l.getId())) {
+                            lucrareSimilara.setProcentDeSimilaritate(this.comparaLucrarile(id1, l.getId()));
+                            lucrareSimilara.setId(l.getId());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        });
+
+        return lucrareSimilara;
     }
 
     public static double calculeazaProcentul(String first, String second) {

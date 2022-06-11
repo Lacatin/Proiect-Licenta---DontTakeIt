@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LucrareSimilara } from "~shared/model/lucrare-similara-model";
 
 
 @Injectable({
@@ -39,9 +40,13 @@ export class RestService{
     }
 
     comparaLucrari(id1: number, id2: number): Observable<number> {
-      let fullUrl = this.baseUrl + '/lucrari/comparare' + "?id1=" + id1 + "&id2=" + id2;
+      let fullUrl = this.baseUrl + '/lucrari/comparare-lucrari' + "?id1=" + id1 + "&id2=" + id2;
       return this.httpClient.get<number>(fullUrl).pipe(map((response: number) => response));
     }
 
+    comparaLucrare(id1: number): Observable<LucrareSimilara> {
+      let fullUrl = this.baseUrl + '/lucrari/comparare-lucrare' + "?id1=" + id1;
+      return this.httpClient.get<LucrareSimilara>(fullUrl).pipe(map((response: LucrareSimilara) => response));
+    }
 
 }

@@ -14,7 +14,7 @@
             <mat-icon>delete_outline</mat-icon>
             </button>
             <button type="button" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolAIsEmpty()" (click)="submitNrMatricolA()">
-                Filtreaza Lucrari
+                Filtreaza lucrari
             </button>
         </div>
         <br>
@@ -32,7 +32,7 @@
             </button>
             <br>
             <button type="button" mat-raised-button color="primary" [disabled]="!checkIfLucrare1IsEmpty()" (click)="submitLucrare1()">
-                Alege Lucrarea
+                Alege lucrarea
             </button>
         </div>
 
@@ -52,7 +52,7 @@
             <mat-icon>delete_outline</mat-icon>
             </button>
             <button type="button" mat-raised-button color="primary" [disabled]="!checkIfNrMatricolBIsEmpty()" (click)="submitNrMatricolB()">
-                Filtreaza Lucrari
+                Filtreaza lucrari
             </button>
         </div>
         <br>
@@ -70,20 +70,20 @@
             </button>
             <br>
             <button type="button" mat-raised-button color="primary" [disabled]="!checkIfLucrare2IsEmpty()" (click)="submitLucrare2()">
-                Alege Lucrarea
+                Alege lucrarea
             </button>
         </div>
     </div>
 
     <div class="compara-deschide">
         <button type="submit" mat-raised-button color="primary" [disabled]="!(checkIfLucrare1IsEmpty() && checkIfLucrare2IsEmpty())" (click)="submit()">
-            Compara Lucrarile
+            Compara lucrarile
         </button>
         
         <mat-spinner *ngIf="areFilesComparing" [diameter]="35" color="accent"></mat-spinner>
 
         <button style="margin-left: 0.8vw;" type="button" mat-raised-button color="primary" *ngIf="filesCompared" (click)="afiseazaProcent()">
-            Vezi Rezultatul
+            Vezi rezultatul
         </button>
     </div>
 

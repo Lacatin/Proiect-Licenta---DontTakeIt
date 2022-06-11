@@ -1,0 +1,41 @@
+
+.student {
+    float: left;
+}
+
+button {
+    margin: 1%;
+}
+
+.similaritate-text {
+    position: relative;
+    top: 10vh;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #19a9e2;
+}
+
+.similaritate-procent {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    font-size: 2em; 
+    text-align: center;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease;
+    animation: ani 1s forwards;
+}
+
+@keyframes ani {
+    100%{
+        transform: scale(2.5);
+    }
+}
+
+@media screen and (max-width: 1000px){
+    h1 { 
+      font-size: 2em;
+    }
+  }

@@ -14,6 +14,7 @@ import { StudentiPageComponent } from './studenti-dashboard/studenti-page/studen
 import { ImportLucrareComponent } from './studenti-dashboard/studenti-page/import-lucrare/import-lucrare.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { StudentiComparareComponent } from './studenti-comparare/studenti-comparare.component';
+import { LucrariComparareComponent } from './lucrari-comparare/lucrari-comparare.component';
 
 
 const ANGULAR_MATERIAL: any[] = [
@@ -50,6 +51,7 @@ const FUNCTIONAL_SERVICES: any[] = [];
         AlertPopUpComponent,
         ImportLucrareComponent,
         StudentiComparareComponent,
+        LucrariComparareComponent,
     ],
     imports: [
         ...ANGULAR_MATERIAL,
