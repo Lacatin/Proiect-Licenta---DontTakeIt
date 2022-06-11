@@ -147,6 +147,8 @@ export class LucrariComparareComponent implements OnInit {
   }
 
   submitLucrare() {
+    this.lucrareStudent = this.getLucrareByNume(this.formGroup.value['lucrare'])[0];
+    console.log('Lucrare aleasa:', this.lucrareStudent);
     return this.getLucrareByNume(this.formGroup.value['lucrare'])[0];
   }
 
@@ -160,15 +162,22 @@ export class LucrariComparareComponent implements OnInit {
       
       this.areFilesComparing = false;
       this.filesCompared = true;
-    });
 
-    this.restService.get<Lucrare>('/lucrari/' + this.lucrareSimilara.id).subscribe((data: Lucrare) =>{
-      this.ceaMaiSimilaraLucrare = data;
-      this.studentCuLucrareSimilara = this.ceaMaiSimilaraLucrare.student;
-    })
+      this.restService.get<Lucrare>('/lucrari/' + this.lucrareSimilara.id).subscribe((data: Lucrare) =>{
+        this.ceaMaiSimilaraLucrare = data;
+
+        for(let stud of this.studenti) {
+            if (stud.lucrari.some(l => l.id === this.ceaMaiSimilaraLucrare.id)) {
+              this.studentCuLucrareSimilara = stud;
+            }
+        }
+      })
+    });
   }
 
   afiseazaLucrarea() {;
+    console.log('Lucrare similara:', this.ceaMaiSimilaraLucrare);
+    console.log('student:', this.studentCuLucrareSimilara);
     this.afiseazaLucrareaSimilara = true;
   }
 

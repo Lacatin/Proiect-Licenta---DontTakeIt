@@ -48,8 +48,10 @@
 
     </div>
 
-    <p *ngIf="afiseazaLucrareaSimilara">Cea mai similara lucrare existenta in baza de date actuala are coeficientul de plagiatura egal cu procentul de mai jos.</p>
-    <p *ngIf="afiseazaLucrareaSimilara">Lucrarea {{lucrareStudent.nume}} ce apartine studentului {{student.nume}} este similara in proporție de {{lucrareSimilara.procentDeSimilaritate}} cu lucrarea {{ceaMaiSimilaraLucrare.nume}} a studentului {{studentCuLucrareSimilara.nume}} {{studentCuLucrareSimilara.prenume}}</p>
+    <div class="similaritate-text">
+        <p *ngIf="afiseazaLucrareaSimilara">Cea mai similara lucrare existenta in baza de date actuala are coeficientul de plagiatura egal cu procentul de mai jos.</p>
+        <p *ngIf="afiseazaLucrareaSimilara">Lucrarea {{lucrareStudent.nume}} ce apartine studentului {{student.nume}} {{student.prenume}} este similara in proporție de {{lucrareSimilara.procentDeSimilaritate | number}} % cu lucrarea {{ceaMaiSimilaraLucrare.nume}} a studentului {{studentCuLucrareSimilara.nume}} {{studentCuLucrareSimilara.prenume}}</p>    
+    </div>
 
     <h2 class="similaritate-procent" *ngIf="afiseazaLucrareaSimilara">{{lucrareSimilara.procentDeSimilaritate | number}} %</h2>
 
