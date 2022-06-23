@@ -58,7 +58,7 @@ public class LucrareServiceImpl implements LucrareService {
             throw new WrongFileUploadedException("Lucrarea nu s-a putut incarca. Asigura-te ca totul este in regula.");
         }
 
-            //saving the file on the server computer
+            //salvam fisierul in computerul server
             byte[] bytes = file.getBytes();
             Path filename = Paths.get(file.getOriginalFilename());
             Path fullPath = Path.of(pdfPcPath, filename.toString());
@@ -66,7 +66,7 @@ public class LucrareServiceImpl implements LucrareService {
             outputStream.write(bytes);
             outputStream.close();
 
-            //saving the file path and other details in DB
+            //salvam calea catre fisier si alte detalii ale acestuia in baza de date
             Student student = studentService.findById(studentId);
 
             Lucrare lucrare = Lucrare.builder()
